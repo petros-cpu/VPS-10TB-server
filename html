@@ -1,0 +1,46 @@
+Alright! Here's a full Termux script that:
+
+1. Installs required packages (openssh, rclone)
+
+
+2. Connects to your server via SSH
+
+
+3. Sets up and mounts the server storage via rclone (SFTP method)
+
+
+
+
+---
+
+One-in-all Termux script:
+
+# Step 1: Install SSH and rclone
+pkg update -y && pkg install openssh rclone -y
+
+# Step 2: SSH into server (edit with your real credentials)
+ssh root@your.server.ip.address
+
+# Step 3: Configure rclone for SFTP (manual step)
+echo "Now setting up rclone. Follow the prompts to add a new remote (choose SFTP)."
+rclone config
+
+# Step 4: Create a mountpoint folder
+mkdir -p ~/mnt
+
+# Step 5: Mount the remote server (edit 'myremote' and path if needed)
+rclone mount myremote:/ ~/mnt --vfs-cache-mode writes
+
+
+---
+
+How to Use:
+
+Replace root@your.server.ip.address with your actual server IP.
+
+In rclone config, create a new remote, choose SFTP, and name it myremote.
+
+The mounted 10TB storage will be available in ~/mnt.
+
+
+Want me to automate even
